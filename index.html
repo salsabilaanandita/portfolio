@@ -475,6 +475,7 @@
         .social-link:hover {
             transform: translateY(-3px);
             color: #ffffff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .social-link i {
@@ -741,7 +742,7 @@
             font-size: 0.75rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
@@ -750,6 +751,8 @@
 
         .detail-button:hover {
             background: #2563eb;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
         }
 
         /* Modal Styles */
@@ -878,13 +881,14 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .stat-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.4);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.2);
         }
 
         .stat-number {
@@ -915,8 +919,8 @@
 
         .download-cv:hover {
             background: #2563eb;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
         }
 
         /* Projects Section */
@@ -971,7 +975,8 @@
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.2);
         }
 
         .project-image {
@@ -1018,6 +1023,14 @@
             border-radius: 15px;
             font-size: 0.8rem;
             font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background: #d1d5db;
         }
 
         .project-links {
@@ -1033,11 +1046,12 @@
             color: #3b82f6;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .project-link:hover {
             color: #2563eb;
+            transform: translateY(-2px);
         }
 
         /* Skills Section */
@@ -1083,13 +1097,14 @@
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.4);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border-color: rgba(255,255,255,0.2);
         }
 
         .skill-category h3 {
@@ -1114,6 +1129,20 @@
             border-radius: 25px;
             font-size: 0.9rem;
             font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
         }
 
         /* Contact Section */
@@ -1257,8 +1286,8 @@
 
         .submit-btn:hover {
             background: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
         }
 
         /* Certificates Section */
@@ -1727,10 +1756,10 @@
     <!-- Profile Popup -->
     <div class="profile-popup" id="profile-popup">
         <div class="profile-avatar">
-            <i class="fas fa-user"></i>
+            <img src="assets/img/profile.jpg" alt="Salsabila Anandita Putri" class="profile-img">
         </div>
         <div class="profile-info">
-            <h3>Salsabila</h3>
+            <h3>Salsabila A.P</h3>
         </div>
     </div>
 
@@ -1780,17 +1809,8 @@
                 <div class="about-text">
             <h2><i class="fas fa-user-circle"></i> About</h2>
             <p>
-                Saya adalah siswa SMK Wikrama Bogor jurusan Rekayasa Perangkat Lunak 
-                yang tertarik pada pengembangan aplikasi web.
-            </p>
-            <p>
-                Memiliki pengalaman mengerjakan berbagai proyek web serta magang di 
-                PT Mede Media Softika sebagai Technical Writer, QA, System Analyst, 
-                Frontend, dan Backend Developer.
-            </p>
-            <p>
-                Saya terbiasa membuat kode yang rapi, mudah dipahami, dan terus 
-                mengembangkan skill di bidang web development.
+                Siswa SMK Wikrama Bogor jurusan Rekayasa Perangkat Lunak yang tertarik pada pengembangan aplikasi web. Berpengalaman mengerjakan proyek web dan magang di PT Mede Media Softika dengan berbagai peran teknis.
+
             </p>
             <a href="#" class="download-cv">
                 <i class="fas fa-download"></i> Download CV
@@ -1834,7 +1854,7 @@
                         <div class="timeline-content">
                             <div class="timeline-date">2023 - 2026</div>
                             <h3 class="timeline-title">SMK Wikrama Bogor</h3>
-                            <div class="timeline-company">Rekayasa Perangkat Lunak (RPL)</div>
+                            <div class="timeline-company">Pengembangan Perangkat Lunak Dan GIM (PPLG)</div>
                             <p class="timeline-description">Fokus pada pengembangan aplikasi berbasis web dan pemahaman dasar software development, mulai dari analisis kebutuhan sampai implementasi.</p>
                             <button class="detail-button" onclick="openModal('modal4')">
                                 <i class="fas fa-info-circle"></i> Detail
@@ -1853,7 +1873,7 @@
                             <i class="fas fa-code"></i>
                         </div>
                         <div class="timeline-content">
-                            <div class="timeline-date">2024</div>
+                            <div class="timeline-date">14 Jul 2025 - 31 Des 2025</div>
                             <h3 class="timeline-title">PT Mede Media Softika</h3>
                             <div class="timeline-company">Intern / Magang IT (Multi Role)</div>
                             <p class="timeline-description">Berperan dalam berbagai proses pengembangan sistem, mulai dari dokumentasi, analisis, pengujian, hingga implementasi frontend dan backend.</p>
@@ -1875,7 +1895,7 @@
                 <button class="modal-close" onclick="closeModal('modal1')">&times;</button>
             </div>
             <div class="modal-body">
-                <strong>PT Mede Media Softika</strong> • <em>2024</em>
+                <strong>PT Mede Media Softika</strong> • <em>14 Jul 2025 - 31 Des 2025</em>
                 <h4>Role yang Dijalani:</h4>
                 <ul>
                     <li><strong>📝 Technical Writer</strong> - Dokumentasi sistem dan user manual</li>
@@ -1905,9 +1925,9 @@
                 </ul>
                 <p><strong>⚙️ Backend Developer:</strong></p>
                 <ul>
-                    <li>Mengelola database (MySQL)</li>
-                    <li>Membuat dan menyesuaikan API sederhana</li>
-                    <li>Mengembangkan fitur berbasis PHP</li>
+                    <li>Mengelola database (PostgreSQL)</li>
+                    <!-- <li>Membuat dan menyesuaikan API sederhana</li> -->
+                    <li>Mengembangkan fitur berbasis Framework PHP CodeInteger</li>
                 </ul>
                 <p><strong>🎨 Frontend Developer:</strong></p>
                 <ul>
@@ -1916,12 +1936,12 @@
                     <li>Menyesuaikan UI agar lebih user-friendly</li>
                 </ul>
                 <h4>Tools & Tech Stack:</h4>
-                <p>PHP, HTML, CSS, JavaScript, Bootstrap, MySQL, Git, Figma (implementasi desain)</p>
+                <p>PHP, HTML, CSS, JavaScript, Bootstrap, PostgreSQL</p>
             </div>
         </div>
     </div>
 
-    <div id="modal2" class="modal">
+    <!-- <div id="modal2" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Full Stack Developer</h2>
@@ -1948,9 +1968,9 @@
                 <p>Vue.js, Nuxt.js, Express.js, MongoDB, MySQL, Socket.IO, Docker, Digital Ocean, Stripe API, Google Maps API</p>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div id="modal3" class="modal">
+    <!-- <div id="modal3" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Frontend Developer</h2>
@@ -1977,7 +1997,7 @@
                 <p>React, JavaScript (ES6+), HTML5, CSS3, SASS, Bootstrap, Git, GitHub, NPM, Webpack</p>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div id="modal4" class="modal">
         <div class="modal-content">
@@ -1988,7 +2008,7 @@
             <div class="modal-body">
                 <strong>SMK Wikrama Bogor</strong> • <em>2023 - 2026</em>
                 <h4>Program Studi:</h4>
-                <p><strong>Rekayasa Perangkat Lunak (RPL)</strong> - Fokus pada pengembangan aplikasi berbasis web dan pemahaman dasar software development, mulai dari analisis kebutuhan sampai implementasi.</p>
+                <p><strong>Pengembangan Perangkat Lunak Dan GIM (PPLG)</strong> - Fokus pada pengembangan aplikasi berbasis web dan pemahaman dasar software development, mulai dari analisis kebutuhan sampai implementasi.</p>
                 
                 <h4>Pencapaian & Pembelajaran:</h4>
                 <ul>
