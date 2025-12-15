@@ -1594,6 +1594,37 @@
             visibility: visible;
         }
 
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 9999;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .mobile-menu-btn.active {
+            background: #3b82f6;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .about-content {
@@ -1605,12 +1636,35 @@
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
+
+            .experience-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .home {
+                flex-direction: column;
+                gap: 4rem;
+                text-align: center;
+                padding: 2rem 3rem;
+            }
+
+            .profile-section {
+                order: -1;
+                flex: 0 0 auto;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+                font-size: 3rem;
+            }
         }
 
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
-                width: 280px;
+                width: 220px;
                 box-shadow: 0 0 40px rgba(0,0,0,0.3);
             }
 
@@ -1626,6 +1680,28 @@
                 margin-left: 0 !important;
             }
 
+            .home {
+                flex-direction: column;
+                gap: 3rem;
+                text-align: center;
+                padding: 5rem 2rem 4rem 2rem;
+                min-height: auto;
+            }
+
+            .profile-section {
+                order: -1;
+            }
+
+            .profile-photo {
+                width: 180px;
+                height: 180px;
+                font-size: 2.5rem;
+            }
+
+            .home-content {
+                max-width: 100%;
+            }
+
             .home-content h1 {
                 font-size: 2.5rem;
             }
@@ -1634,12 +1710,32 @@
                 font-size: 1.2rem;
             }
 
+            .social-links {
+                justify-content: center;
+                gap: 1.5rem;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-link i {
+                font-size: 1.4rem;
+            }
+
+            .cta-button {
+                padding: 14px 35px;
+                font-size: 1.1rem;
+            }
+
             .section {
                 padding: 4rem 1.5rem;
             }
 
             .projects-grid {
                 grid-template-columns: 1fr;
+                gap: 2.5rem;
             }
 
             .skills-categories {
@@ -1653,12 +1749,47 @@
         }
 
         @media (max-width: 480px) {
+            .home {
+                padding: 4rem 1rem 3rem 1rem;
+                gap: 2.5rem;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+                font-size: 2rem;
+            }
+
             .home-content h1 {
                 font-size: 2rem;
             }
 
             .home-content .subtitle {
                 font-size: 1.1rem;
+            }
+
+            .home-content p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .social-link {
+                width: 45px;
+                height: 45px;
+            }
+
+            .social-link i {
+                font-size: 1.2rem;
+            }
+
+            .cta-button {
+                padding: 12px 28px;
+                font-size: 1rem;
             }
 
             .section {
@@ -1668,30 +1799,189 @@
             .about-text h2,
             .projects h2,
             .skills h2,
+            .experience h2,
             .contact h2 {
                 font-size: 2rem;
+                text-align: center;
+            }
+
+            .about-text h2 i,
+            .projects h2 i,
+            .skills h2 i,
+            .experience h2 i,
+            .contact h2 i {
+                display: block;
+                margin-bottom: 0.5rem;
+                font-size: 1.5rem;
+            }
+
+            .about-text h2::after,
+            .projects h2::after,
+            .skills h2::after,
+            .experience h2::after,
+            .contact h2::after {
+                left: 50%;
+                transform: translateX(-50%);
             }
 
             .project-stats {
                 grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-item {
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
             }
 
             .modal-content {
                 width: 95%;
                 max-height: 90vh;
                 margin: 2% auto;
+                border-radius: 10px;
             }
 
             .modal-header {
                 padding: 1rem 1.5rem;
             }
 
+            .modal-title {
+                font-size: 1.2rem;
+            }
+
             .modal-body {
                 padding: 1.5rem;
+                font-size: 0.95rem;
             }
 
             .contact-form {
                 padding: 1.5rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 12px 15px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .timeline-item {
+                padding-left: 2rem;
+            }
+
+            .timeline-item-icon {
+                left: -5px;
+                width: 25px;
+                height: 25px;
+                font-size: 0.7rem;
+            }
+
+            .timeline-content {
+                padding: 1rem;
+            }
+
+            .mobile-menu-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Extra Small Devices (phones in portrait) */
+        @media (max-width: 320px) {
+            .home-content h1 {
+                font-size: 1.8rem;
+                line-height: 1.2;
+            }
+
+            .home-content .subtitle {
+                font-size: 1rem;
+            }
+
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: 2.5rem 0.8rem;
+            }
+
+            .about-text h2,
+            .projects h2,
+            .skills h2,
+            .experience h2,
+            .contact h2 {
+                font-size: 1.8rem;
+            }
+
+            .social-links {
+                gap: 0.8rem;
+            }
+
+            .social-link {
+                width: 40px;
+                height: 40px;
+            }
+
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Landscape Phones */
+        @media (max-width: 667px) and (orientation: landscape) {
+            .home {
+                flex-direction: row;
+                gap: 3rem;
+                padding: 2rem;
+                text-align: left;
+            }
+
+            .profile-section {
+                order: 0;
+                flex: 0 0 200px;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            .home-content {
+                text-align: left;
+            }
+
+            .social-links {
+                justify-content: flex-start;
+            }
+        }
+
+        /* Tablet Portrait */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+            .home {
+                flex-direction: column;
+                gap: 4rem;
+                text-align: center;
+                padding: 4rem 3rem;
+            }
+
+            .profile-photo {
+                width: 220px;
+                height: 220px;
+            }
+
+            .home-content h1 {
+                font-size: 3rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
             }
         }
     </style>
@@ -1763,6 +2053,11 @@
         </div>
     </div>
 
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <!-- Sidebar Overlay for Mobile -->
     <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
@@ -1809,8 +2104,7 @@
                 <div class="about-text">
             <h2><i class="fas fa-user-circle"></i> About</h2>
             <p>
-                Siswa SMK Wikrama Bogor jurusan Rekayasa Perangkat Lunak yang tertarik pada pengembangan aplikasi web. Berpengalaman mengerjakan proyek web dan magang di PT Mede Media Softika dengan berbagai peran teknis.
-
+                Siswa SMK Wikrama Bogor jurusan Rekayasa Perangkat Lunak yang tertarik pada pengembangan aplikasi web.
             </p>
             <a href="assets/cv/CV_SALSABILA ANANDITA PUTRI.pdf (1).pdf" class="download-cv">
                 <i class="fas fa-download"></i> Download CV
@@ -2434,12 +2728,48 @@
         const sidebarToggle = document.getElementById('sidebar-toggle');
         const profilePopup = document.getElementById('profile-popup');
         const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const navLinks = document.querySelectorAll('.nav-link');
         
         // Toggle profile popup instead of sidebar
         sidebarToggle.addEventListener('click', function(e) {
             e.stopPropagation();
             profilePopup.classList.toggle('active');
+        });
+
+        // Mobile menu functionality
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebar.classList.toggle('mobile-open');
+            sidebarOverlay.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+            
+            // Prevent body scroll when mobile menu is open
+            if (sidebar.classList.contains('mobile-open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu when clicking overlay
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('mobile-open');
+            sidebarOverlay.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close mobile menu when clicking nav link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-open');
+                    sidebarOverlay.classList.remove('active');
+                    mobileMenuBtn.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
         });
         
         // Close profile popup when clicking outside
@@ -2591,6 +2921,7 @@
             if (window.innerWidth > 768) {
                 sidebar.classList.remove('mobile-open');
                 sidebarOverlay.classList.remove('active');
+                mobileMenuBtn.classList.remove('active');
                 document.body.style.overflow = '';
             }
         });
