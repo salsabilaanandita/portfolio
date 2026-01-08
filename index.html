@@ -2980,11 +2980,12 @@
                         placeholder="Ceritakan tentang project atau pertanyaan Anda..." 
                         required
                         tabindex="4"
+                        rows="5"
                     ></textarea>
                 </div>
                 
                 <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i> Kirim Pesan
+                    <i class="fas fa-paper-plane"></i> Kirim Email
                 </button>
             </form>
         </div>
@@ -3335,64 +3336,252 @@
             });
         });
         
-        // Contact form handling with Formspree (easier alternative)
+        // Contact form - Simple & reliable method
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const submitBtn = this.querySelector('.submit-btn');
             const originalText = submitBtn.innerHTML;
             
-            // Show loading state
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Validate form
+            if (!name || !email || !subject || !message) {
+                showNotification('❌ Mohon isi semua field!', 'error');
+                return;
+            }
+            
+            // Show loading
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
             submitBtn.disabled = true;
             
-            // Get form data
-            const formData = new FormData(this);
+            // Create email content
+            const emailSubject = encodeURIComponent(`${subject} - dari ${name}`);
+            const emailBody = encodeURIComponent(`Halo Salsabila!
+
+Anda mendapat pesan baru dari portfolio website:
+
+Nama: ${name}
+Email: ${email}
+
+Pesan:
+${message}
+
+---
+Dikirim dari Portfolio Contact Form`);
             
-            // Send to Formspree (replace YOUR_FORM_ID with actual Formspree form ID)
-            fetch('https://formspree.io/f/xdkoqpzk', { // Ganti dengan Form ID Anda dari formspree.io
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    // Success
-                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Pesan Terkirim!';
-                    submitBtn.style.background = '#10b981';
-                    
-                    setTimeout(() => {
-                        this.reset();
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.style.background = '';
-                        submitBtn.disabled = false;
-                        
-                        alert('Terima kasih! Pesan Anda telah berhasil dikirim.');
-                    }, 2000);
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            }).catch(error => {
-                console.error('Error:', error);
+            // Create mailto link
+            const mailtoLink = `mailto:salsabilaananditaputri@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+            
+            // Try to open email client
+            try {
+                window.open(mailtoLink, '_blank');
                 
-                // Fallback to mailto
+                // Success state
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Email Client Dibuka!';
+                submitBtn.style.background = '#10b981';
+                
+                showNotification('📧 Email client dibuka! Silakan klik Send untuk mengirim email.', 'success');
+                
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+                
+            } catch (error) {
+                submitBtn.innerHTML = '<i class="fas fa-times"></i> Error';
+                submitBtn.style.background = '#ef4444';
+                showNotification('❌ Terjadi error. Silakan email langsung ke: salsabilaananditaputri@gmail.com', 'error');
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        });
+        
+        // Alternative simple method - Let browser submit naturally
+        function enableSimpleSubmit() {
+            const form = document.getElementById('contactForm');
+            form.addEventListener('submit', function(e) {
+                // Don't prevent default - let browser submit naturally
+                const submitBtn = this.querySelector('.submit-btn');
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+                submitBtn.disabled = true;
+            });
+        }
+        
+        // Try simple submit if AJAX fails
+        setTimeout(() => {
+            enableSimpleSubmit();
+        }, 100);
+        
+        // Backup method if Formspree has issues
+        function addFormBackup() {
+            const form = document.getElementById('contactForm');
+            
+            // Add error handler for form submission
+            form.addEventListener('error', function() {
+                console.log('Form submission error, using backup method');
+                const formData = new FormData(form);
                 const name = formData.get('name');
-                const email = formData.get('email');
+                const email = formData.get('_replyto');
                 const subject = formData.get('subject');
                 const message = formData.get('message');
                 
-                const mailtoLink = `mailto:salsabilaananditaputri@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`)}`;
+                // Create mailto link as backup
+                const mailtoLink = `mailto:salsabilaananditaputri@gmail.com?subject=${encodeURIComponent(subject + ' - dari ' + name)}&body=${encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}\n\n---\nDikirim dari Portfolio Website`)}`;
                 
-                window.location.href = mailtoLink;
+                window.open(mailtoLink, '_blank');
                 
-                submitBtn.innerHTML = originalText;
-                submitBtn.style.background = '';
-                submitBtn.disabled = false;
-                
-                alert('Membuka email client Anda untuk mengirim pesan.');
+                showNotification('📧 Email client dibuka sebagai backup. Silakan kirim email manual.', 'info');
             });
-        });
+        }
+        
+        // Initialize backup when page loads
+        document.addEventListener('DOMContentLoaded', addFormBackup);
+        function submitFormAjax() {
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const submitBtn = this.querySelector('.submit-btn');
+                const originalText = submitBtn.innerHTML;
+                
+                // Show loading state
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+                submitBtn.disabled = true;
+                
+                // Get form data
+                const formData = new FormData(this);
+                
+                // Try multiple methods
+                Promise.resolve()
+                    .then(() => {
+                        // Method 1: Formspree with your email
+                        return fetch('https://formspree.io/f/salsabilaananditaputri@gmail.com', {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                            throw new Error('Formspree submission failed');
+                        }
+                    })
+                    .then(data => {
+                        // Success
+                        submitBtn.innerHTML = '<i class="fas fa-check"></i> Email Terkirim!';
+                        submitBtn.style.background = '#10b981';
+                        
+                        setTimeout(() => {
+                            this.reset();
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.style.background = '';
+                            submitBtn.disabled = false;
+                            
+                            // Show success message
+                            showNotification('✅ Email berhasil dikirim ke salsabilaananditaputri@gmail.com', 'success');
+                        }, 2000);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        
+                        // Fallback to mailto
+                        const name = formData.get('name');
+                        const email = formData.get('_replyto');
+                        const subject = formData.get('subject');
+                        const message = formData.get('message');
+                        
+                        const mailtoLink = `mailto:salsabilaananditaputri@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`)}`;
+                        
+                        window.open(mailtoLink, '_blank');
+                        
+                        submitBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Email Dibuka';
+                        submitBtn.style.background = '#3b82f6';
+                        
+                        setTimeout(() => {
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.style.background = '';
+                            submitBtn.disabled = false;
+                        }, 3000);
+                        
+                        showNotification('Email client Anda telah dibuka. Silakan kirim email dari aplikasi email Anda.', 'info');
+                    });
+            });
+        }
+        
+        // Notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                max-width: 300px;
+                font-size: 0.9rem;
+                line-height: 1.4;
+                animation: slideIn 0.3s ease-out;
+            `;
+            
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'times' : 'info'}-circle" style="margin-right: 0.5rem;"></i>
+                ${message}
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-in forwards';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+            
+            // Click to close
+            notification.addEventListener('click', () => {
+                notification.style.animation = 'slideOut 0.3s ease-in forwards';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            });
+        }
+        
+        // Add notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
         
         // Add animation on scroll
         function animateOnScroll() {
@@ -3498,6 +3687,15 @@
                 document.body.style.overflow = 'auto';
             }
         });
+    </script>
+    <script>
+        // Initialize EmailJS (uncomment and add your IDs after setup)
+        // emailjs.init("YOUR_PUBLIC_KEY_HERE"); // Get from EmailJS dashboard
+        
+        // Alternative: Initialize when needed
+        // (function(){
+        //     emailjs.init("YOUR_PUBLIC_KEY_HERE");
+        // })();
     </script>
 </body>
 </html>
