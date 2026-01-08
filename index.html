@@ -2,7 +2,10 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Portfolio - Salsabila Anandita Putri</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -957,7 +960,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
@@ -1088,7 +1091,7 @@
 
         .skills-categories {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 2rem;
         }
 
@@ -1311,7 +1314,7 @@
 
         .certificates-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
@@ -1504,7 +1507,36 @@
             color: #3b82f6;
         }
 
-        /* Image Styling */
+        /* Loading and focus improvements */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Focus states for accessibility */
+        .nav-links a:focus,
+        .cta-button:focus,
+        .detail-button:focus,
+        .view-certificate-btn:focus,
+        .submit-btn:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        
+        /* Loading state for images */
+        .profile-img,
+        .project-img,
+        .certificate-img {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .profile-img.loaded,
+        .project-img.loaded,
+        .certificate-img.loaded {
+            opacity: 1;
+        }
         .profile-img {
             width: 100%;
             height: 100%;
@@ -1625,7 +1657,158 @@
             background: #3b82f6;
         }
 
-        /* Responsive Design */
+        /* Safe area support for notched devices */
+        @supports (padding: max(0px)) {
+            .mobile-menu-btn {
+                top: max(1rem, env(safe-area-inset-top));
+                left: max(1rem, env(safe-area-inset-left));
+            }
+            
+            .main-content {
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+            
+            .footer {
+                padding-bottom: max(2rem, env(safe-area-inset-bottom));
+            }
+        }
+        
+        /* Improve scrolling on iOS */
+        .modal-body,
+        .sidebar {
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* Prevent horizontal scroll */
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        .main-content {
+            width: 100%;
+            min-width: 0;
+        }
+        
+        /* Loading and focus improvements */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Focus states for accessibility */
+        .nav-links a:focus,
+        .cta-button:focus,
+        .detail-button:focus,
+        .view-certificate-btn:focus,
+        .submit-btn:focus {
+            outline: 2px solid #3b82f6;
+            outline-offset: 2px;
+        }
+        
+        /* Loading state for images */
+        .profile-img,
+        .project-img,
+        .certificate-img {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .profile-img.loaded,
+        .project-img.loaded,
+        .certificate-img.loaded {
+            opacity: 1;
+        }
+
+        /* Touch-friendly improvements */
+        @media (max-width: 768px) {
+            /* Increase touch targets */
+            .nav-links a {
+                min-height: 60px;
+                min-width: 60px;
+            }
+            
+            .detail-button,
+            .view-certificate-btn,
+            .download-cv,
+            .cta-button,
+            .submit-btn {
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+            
+            /* Remove hover effects on touch devices */
+            .project-card:hover,
+            .skill-category:hover,
+            .certificate-card:hover,
+            .stat-item:hover {
+                transform: none;
+                box-shadow: inherit;
+            }
+            
+            /* Add active states for touch feedback */
+            .project-card:active,
+            .skill-category:active,
+            .certificate-card:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+            
+            /* Improve form spacing on mobile */
+            .form-group {
+                margin-bottom: 2rem;
+            }
+            
+            .form-group label {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+        }
+        
+        /* Improve text readability */
+        @media (max-width: 480px) {
+            body {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+            
+            .about-text p,
+            .contact-info p,
+            .project-description,
+            .timeline-description,
+            .certificate-description {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+            
+            .tech-tag {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .skill-item {
+                font-size: 1rem;
+                padding: 0.6rem 1rem;
+            }
+        }
+        @media (max-width: 1200px) {
+            .section {
+                padding: 5rem 1.5rem;
+                max-width: 1000px;
+            }
+            
+            .home {
+                padding: 2rem 2rem;
+                gap: 5rem;
+            }
+            
+            .sidebar.expanded ~ .main-content {
+                margin-left: 180px;
+            }
+        }
+        
         @media (max-width: 1024px) {
             .about-content {
                 grid-template-columns: 1fr;
@@ -1647,6 +1830,7 @@
                 gap: 4rem;
                 text-align: center;
                 padding: 2rem 3rem;
+                min-height: auto;
             }
 
             .profile-section {
@@ -1655,16 +1839,31 @@
             }
 
             .profile-photo {
-                width: 200px;
-                height: 200px;
+                width: 220px;
+                height: 220px;
                 font-size: 3rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .skills-categories {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .certificates-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
             }
         }
 
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
-                width: 220px;
+                width: 280px;
                 box-shadow: 0 0 40px rgba(0,0,0,0.3);
             }
 
@@ -1685,7 +1884,8 @@
                 gap: 3rem;
                 text-align: center;
                 padding: 5rem 2rem 4rem 2rem;
-                min-height: auto;
+                min-height: 100vh;
+                justify-content: center;
             }
 
             .profile-section {
@@ -1693,8 +1893,8 @@
             }
 
             .profile-photo {
-                width: 180px;
-                height: 180px;
+                width: 200px;
+                height: 200px;
                 font-size: 2.5rem;
             }
 
@@ -1703,34 +1903,48 @@
             }
 
             .home-content h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+                line-height: 1.1;
+                margin-bottom: 1rem;
             }
 
             .home-content .subtitle {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .home-content p {
+                font-size: 1.05rem;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+                max-width: 90%;
+                margin-left: auto;
+                margin-right: auto;
             }
 
             .social-links {
                 justify-content: center;
                 gap: 1.5rem;
+                margin: 2rem 0;
             }
 
             .social-link {
-                width: 50px;
-                height: 50px;
+                width: 55px;
+                height: 55px;
             }
 
             .social-link i {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
 
             .cta-button {
-                padding: 14px 35px;
+                padding: 15px 40px;
                 font-size: 1.1rem;
+                margin-top: 1rem;
             }
 
             .section {
-                padding: 4rem 1.5rem;
+                padding: 4rem 2rem;
             }
 
             .projects-grid {
@@ -1740,42 +1954,258 @@
 
             .skills-categories {
                 grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .certificates-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
 
             .sidebar-header {
-                height: 70px;
+                height: 80px;
                 padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .sidebar.expanded .nav-links a {
+                padding: 1.2rem 1.5rem;
+                font-size: 1.05rem;
+            }
+            
+            .about-text h2,
+            .projects h2,
+            .skills h2,
+            .experience h2,
+            .contact h2,
+            .certificates h2 {
+                font-size: 2.2rem;
+                text-align: center;
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
 
         @media (max-width: 480px) {
             .home {
-                padding: 4rem 1rem 3rem 1rem;
+                padding: 3rem 1.5rem 3rem 1.5rem;
                 gap: 2.5rem;
+                min-height: 100vh;
             }
 
             .profile-photo {
-                width: 150px;
-                height: 150px;
+                width: 160px;
+                height: 160px;
                 font-size: 2rem;
             }
 
             .home-content h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+                line-height: 1.1;
             }
 
             .home-content .subtitle {
-                font-size: 1.1rem;
+                font-size: 1.15rem;
             }
 
             .home-content p {
                 font-size: 1rem;
                 margin-bottom: 1.5rem;
+                line-height: 1.6;
+            }
+
+            .social-links {
+                gap: 1.2rem;
+                margin: 1.5rem 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .social-link {
+                width: 50px;
+                height: 50px;
+            }
+
+            .social-link i {
+                font-size: 1.3rem;
+            }
+
+            .cta-button {
+                padding: 14px 32px;
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .about-text h2,
+            .projects h2,
+            .skills h2,
+            .experience h2,
+            .contact h2,
+            .certificates h2 {
+                font-size: 2rem;
+                text-align: center;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .about-text h2 i,
+            .projects h2 i,
+            .skills h2 i,
+            .experience h2 i,
+            .contact h2 i,
+            .certificates h2 i {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .about-text h2::after,
+            .projects h2::after,
+            .skills h2::after,
+            .experience h2::after,
+            .contact h2::after,
+            .certificates h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .project-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .stat-item {
+                padding: 1.2rem;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .stat-label {
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+                margin: 2.5% auto;
+                border-radius: 10px;
+            }
+
+            .modal-header {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .modal-title {
+                font-size: 1.3rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 14px 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+                border-radius: 8px;
+            }
+
+            .timeline-item {
+                padding-left: 2.5rem;
+            }
+
+            .timeline-item-icon {
+                left: -5px;
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+            }
+
+            .timeline-content {
+                padding: 1.2rem;
+            }
+
+            .mobile-menu-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                top: 1.2rem;
+                left: 1.2rem;
+            }
+            
+            .sidebar {
+                width: 300px;
+            }
+            
+            .skill-category {
+                padding: 1.5rem;
+            }
+            
+            .project-card {
+                margin: 0 0.5rem;
+            }
+            
+            .certificate-card {
+                margin: 0 0.5rem;
+            }
+        }
+
+        /* Extra Small Devices (phones in portrait) */
+        @media (max-width: 320px) {
+            .home {
+                padding: 2rem 1rem;
+                gap: 2rem;
+            }
+            
+            .home-content h1 {
+                font-size: 1.9rem;
+                line-height: 1.2;
+            }
+
+            .home-content .subtitle {
+                font-size: 1rem;
+            }
+
+            .home-content p {
+                font-size: 0.95rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .profile-photo {
+                width: 140px;
+                height: 140px;
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 2.5rem 1rem;
+            }
+
+            .about-text h2,
+            .projects h2,
+            .skills h2,
+            .experience h2,
+            .contact h2,
+            .certificates h2 {
+                font-size: 1.8rem;
             }
 
             .social-links {
                 gap: 1rem;
-                margin: 1.5rem 0;
+                flex-wrap: wrap;
             }
 
             .social-link {
@@ -1784,180 +2214,64 @@
             }
 
             .social-link i {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             .cta-button {
-                padding: 12px 28px;
-                font-size: 1rem;
-            }
-
-            .section {
-                padding: 3rem 1rem;
-            }
-
-            .about-text h2,
-            .projects h2,
-            .skills h2,
-            .experience h2,
-            .contact h2 {
-                font-size: 2rem;
-                text-align: center;
-            }
-
-            .about-text h2 i,
-            .projects h2 i,
-            .skills h2 i,
-            .experience h2 i,
-            .contact h2 i {
-                display: block;
-                margin-bottom: 0.5rem;
-                font-size: 1.5rem;
-            }
-
-            .about-text h2::after,
-            .projects h2::after,
-            .skills h2::after,
-            .experience h2::after,
-            .contact h2::after {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            .project-stats {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .stat-item {
-                padding: 1rem;
-            }
-
-            .stat-number {
-                font-size: 1.5rem;
-            }
-
-            .modal-content {
-                width: 95%;
-                max-height: 90vh;
-                margin: 2% auto;
-                border-radius: 10px;
-            }
-
-            .modal-header {
-                padding: 1rem 1.5rem;
-            }
-
-            .modal-title {
-                font-size: 1.2rem;
-            }
-
-            .modal-body {
-                padding: 1.5rem;
+                padding: 12px 24px;
                 font-size: 0.95rem;
             }
-
-            .contact-form {
-                padding: 1.5rem;
-            }
-
-            .form-group input,
-            .form-group textarea {
-                padding: 12px 15px;
-                font-size: 16px; /* Prevents zoom on iOS */
-            }
-
-            .timeline-item {
-                padding-left: 2rem;
-            }
-
-            .timeline-item-icon {
-                left: -5px;
-                width: 25px;
-                height: 25px;
-                font-size: 0.7rem;
-            }
-
-            .timeline-content {
-                padding: 1rem;
-            }
-
+            
             .mobile-menu-btn {
                 width: 45px;
                 height: 45px;
                 font-size: 1.1rem;
             }
-        }
-
-        /* Extra Small Devices (phones in portrait) */
-        @media (max-width: 320px) {
-            .home-content h1 {
-                font-size: 1.8rem;
-                line-height: 1.2;
-            }
-
-            .home-content .subtitle {
-                font-size: 1rem;
-            }
-
-            .profile-photo {
-                width: 120px;
-                height: 120px;
-                font-size: 1.5rem;
-            }
-
-            .section {
-                padding: 2.5rem 0.8rem;
-            }
-
-            .about-text h2,
-            .projects h2,
-            .skills h2,
-            .experience h2,
-            .contact h2 {
-                font-size: 1.8rem;
-            }
-
-            .social-links {
-                gap: 0.8rem;
-            }
-
-            .social-link {
-                width: 40px;
-                height: 40px;
-            }
-
-            .cta-button {
-                padding: 10px 20px;
-                font-size: 0.9rem;
+            
+            .contact-form {
+                padding: 1.5rem 1rem;
             }
         }
 
         /* Landscape Phones */
-        @media (max-width: 667px) and (orientation: landscape) {
+        @media (max-width: 767px) and (orientation: landscape) {
             .home {
                 flex-direction: row;
-                gap: 3rem;
-                padding: 2rem;
+                gap: 2rem;
+                padding: 1.5rem 2rem;
                 text-align: left;
+                min-height: 100vh;
+                align-items: center;
             }
 
             .profile-section {
                 order: 0;
-                flex: 0 0 200px;
+                flex: 0 0 180px;
             }
 
             .profile-photo {
-                width: 150px;
-                height: 150px;
+                width: 140px;
+                height: 140px;
+                font-size: 2rem;
             }
 
             .home-content {
                 text-align: left;
+                max-width: none;
+                flex: 1;
+            }
+            
+            .home-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .home-content .subtitle {
+                font-size: 1.1rem;
             }
 
             .social-links {
                 justify-content: flex-start;
+                margin: 1.5rem 0;
             }
         }
 
@@ -1971,17 +2285,48 @@
             }
 
             .profile-photo {
-                width: 220px;
-                height: 220px;
+                width: 240px;
+                height: 240px;
             }
 
             .home-content h1 {
-                font-size: 3rem;
+                font-size: 3.2rem;
+            }
+            
+            .home-content .subtitle {
+                font-size: 1.4rem;
             }
 
             .projects-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
+            }
+            
+            .skills-categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .certificates-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* Tablet Landscape */
+        @media (min-width: 1024px) and (max-width: 1200px) and (orientation: landscape) {
+            .home {
+                flex-direction: row;
+                gap: 4rem;
+                text-align: left;
+                padding: 3rem 4rem;
+            }
+            
+            .profile-section {
+                order: 0;
+                flex: 0 0 300px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     </style>
@@ -2107,7 +2452,7 @@
                 Siswa SMK Wikrama Bogor jurusan Rekayasa Perangkat Lunak yang tertarik pada pengembangan aplikasi web.
             </p>
             <a href="assets/cv/CV_SALSABILA ANANDITA PUTRI.pdf (1).pdf" class="download-cv">
-                <i class="fas fa-download"></i> Download CV
+                <i class="fas fa-download"></i> Download CVP
             </a>
         </div>
 
@@ -2674,6 +3019,172 @@
     </div> <!-- Close main-content -->
 
     <script>
+        // Image loading optimization
+        function handleImageLoad() {
+            const images = document.querySelectorAll('.profile-img, .project-img, .certificate-img');
+            
+            images.forEach(img => {
+                if (img.complete && img.naturalHeight !== 0) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                    
+                    img.addEventListener('error', () => {
+                        // Handle image loading error
+                        img.style.display = 'none';
+                    });
+                }
+            });
+        }
+        
+        // Call image loading on DOM content loaded
+        document.addEventListener('DOMContentLoaded', handleImageLoad);
+        
+        // Improve touch interaction
+        function improveTouch() {
+            // Add touch feedback for interactive elements
+            const touchElements = document.querySelectorAll('.project-card, .skill-category, .certificate-card, .stat-item');
+            
+            touchElements.forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.8';
+                }, { passive: true });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '1';
+                }, { passive: true });
+                
+                element.addEventListener('touchcancel', function() {
+                    this.style.opacity = '1';
+                }, { passive: true });
+            });
+        }
+        
+        // Initialize touch improvements
+        if ('ontouchstart' in window) {
+            improveTouch();
+        }
+        
+        // Image loading optimization
+        function handleImageLoad() {
+            const images = document.querySelectorAll('.profile-img, .project-img, .certificate-img');
+            
+            images.forEach(img => {
+                if (img.complete && img.naturalHeight !== 0) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                    
+                    img.addEventListener('error', () => {
+                        // Handle image loading error - show fallback
+                        const parent = img.parentElement;
+                        if (parent.classList.contains('profile-photo')) {
+                            img.style.display = 'none';
+                            parent.innerHTML = '<i class="fas fa-user"></i>';
+                        } else if (parent.classList.contains('project-image')) {
+                            img.style.display = 'none';
+                        } else {
+                            img.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Improve touch interaction
+        function improveTouch() {
+            // Add touch feedback for interactive elements
+            const touchElements = document.querySelectorAll('.project-card, .skill-category, .certificate-card, .stat-item');
+            
+            touchElements.forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.8';
+                }, { passive: true });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '1';
+                }, { passive: true });
+                
+                element.addEventListener('touchcancel', function() {
+                    this.style.opacity = '1';
+                }, { passive: true });
+            });
+        }
+        
+        // Initialize improvements on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize image loading
+            handleImageLoad();
+            
+            // Initialize touch improvements on touch devices
+            if ('ontouchstart' in window) {
+                improveTouch();
+            }
+        });
+        
+        // Image loading optimization
+        function handleImageLoad() {
+            const images = document.querySelectorAll('.profile-img, .project-img, .certificate-img');
+            
+            images.forEach(img => {
+                if (img.complete && img.naturalHeight !== 0) {
+                    img.classList.add('loaded');
+                } else {
+                    img.addEventListener('load', () => {
+                        img.classList.add('loaded');
+                    });
+                    
+                    img.addEventListener('error', () => {
+                        // Handle image loading error - show fallback
+                        const parent = img.parentElement;
+                        if (parent.classList.contains('profile-photo')) {
+                            img.style.display = 'none';
+                            parent.innerHTML = '<i class="fas fa-user"></i>';
+                        } else if (parent.classList.contains('project-image')) {
+                            img.style.display = 'none';
+                        } else {
+                            img.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Improve touch interaction
+        function improveTouch() {
+            // Add touch feedback for interactive elements
+            const touchElements = document.querySelectorAll('.project-card, .skill-category, .certificate-card, .stat-item');
+            
+            touchElements.forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.8';
+                }, { passive: true });
+                
+                element.addEventListener('touchend', function() {
+                    this.style.opacity = '1';
+                }, { passive: true });
+                
+                element.addEventListener('touchcancel', function() {
+                    this.style.opacity = '1';
+                }, { passive: true });
+            });
+        }
+        
+        // Initialize improvements on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize image loading
+            handleImageLoad();
+            
+            // Initialize touch improvements on touch devices
+            if ('ontouchstart' in window) {
+                improveTouch();
+            }
+        });
+        
         // Typing Animation
         const text = "Frontend Developer";
         const typingElement = document.getElementById('typing-text');
